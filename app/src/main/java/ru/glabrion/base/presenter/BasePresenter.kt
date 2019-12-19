@@ -12,6 +12,7 @@ open class BasePresenter<V: BaseViewInterface> : BasePresenterInterface<V> {
         this.view = view
     }
 
+
     override fun detach() {
         view = null
     }
