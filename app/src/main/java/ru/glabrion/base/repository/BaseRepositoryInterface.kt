@@ -1,0 +1,3 @@
+package ru.glabrion.base.repository
+
+interface BaseRepositoryInterface
