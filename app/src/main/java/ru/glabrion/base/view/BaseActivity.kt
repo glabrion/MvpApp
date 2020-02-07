@@ -12,7 +12,9 @@ abstract class BaseActivity : AppCompatActivity(), BaseViewInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
-        init(savedInstanceState)
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            init(savedInstanceState)
+        }
     }
 
     protected abstract fun init(state: Bundle?)

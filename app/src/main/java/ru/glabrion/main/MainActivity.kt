@@ -1,6 +1,5 @@
 package ru.glabrion.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.glabrion.R
@@ -12,15 +11,11 @@ import ru.glabrion.main.screen.general.GeneralFragment
 
 class MainActivity : BaseActivity(), ProgressManager {
 
-    private val generalFragment = GeneralFragment()
     override val layoutResId: Int
         get() = R.layout.activity_main
 
     override fun init(state: Bundle?) {
-        supportFragmentManager.beginTransaction().add(
-            R.id.main_fragment_container,
-            generalFragment
-        ).commit()
+        openGeneralScreen()
     }
 
     override fun showProgress() {
@@ -29,6 +24,15 @@ class MainActivity : BaseActivity(), ProgressManager {
 
     override fun hideProgress() {
         main_progress.gone()
+    }
+
+    private fun openGeneralScreen(){
+        val generalFragment = GeneralFragment()
+        supportFragmentManager.beginTransaction().replace(
+            R.id.main_fragment_container,
+            generalFragment
+        ).addToBackStack(generalFragment.tag)
+            .commit()
     }
 
 }
