@@ -1,19 +1,20 @@
-package ru.glabrion.main.screen.general
+package ru.glabrion.main.screens.general
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_general.view.*
-import org.koin.android.ext.android.inject
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_general.*
 import ru.glabrion.R
-import ru.glabrion.common.toast
 import ru.glabrion.base.view.BaseFragment
 import ru.glabrion.main.MainActivity
+import ru.glabrion.main.screens.general.provider.GeneralStringProvider
 
 class GeneralFragment : BaseFragment(), GeneralContractInterface.View {
 
-    private val generalPresenter: GeneralContractInterface.Presenter by inject()
+    private val generalPresenter = GeneralPresenter()
+    private val generalStringProvider = GeneralStringProvider(context)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,14 +27,17 @@ class GeneralFragment : BaseFragment(), GeneralContractInterface.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         generalPresenter.attach(this)
+        hello_button.setOnClickListener {
+            generalPresenter.showToast()
+        }
     }
 
     override fun showError() {
-        toast("Ошибка загрузки данных")
+        Toast.makeText(context, generalStringProvider.getErrorText(), Toast.LENGTH_LONG).show()
     }
 
-    override fun showContent(text: String) {
-        view?.content?.setText(text)
+    override fun showToast(text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgress() {

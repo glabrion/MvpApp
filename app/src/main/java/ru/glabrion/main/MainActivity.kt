@@ -1,15 +1,13 @@
 package ru.glabrion.main
 
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.glabrion.R
 import ru.glabrion.base.view.BaseActivity
-import ru.glabrion.common.ProgressManager
-import ru.glabrion.common.gone
-import ru.glabrion.common.visible
-import ru.glabrion.main.screen.general.GeneralFragment
+import ru.glabrion.main.screens.general.GeneralFragment
 
-class MainActivity : BaseActivity(), ProgressManager {
+class MainActivity : BaseActivity() {
 
     override val layoutResId: Int
         get() = R.layout.activity_main
@@ -18,12 +16,12 @@ class MainActivity : BaseActivity(), ProgressManager {
         openGeneralScreen()
     }
 
-    override fun showProgress() {
-        main_progress.visible()
+    fun showProgress() {
+        main_progress.visibility = View.VISIBLE
     }
 
-    override fun hideProgress() {
-        main_progress.gone()
+    fun hideProgress() {
+        main_progress.visibility = View.GONE
     }
 
     private fun openGeneralScreen(){
@@ -34,5 +32,4 @@ class MainActivity : BaseActivity(), ProgressManager {
         ).addToBackStack(generalFragment.tag)
             .commit()
     }
-
 }

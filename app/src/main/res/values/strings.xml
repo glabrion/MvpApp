@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MvpApp</string>
+    <string name="error_text">Ошибка загрузки данных</string>
+    <string name="hello_button">Hello</string>
 </resources>

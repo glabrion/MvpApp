@@ -1,18 +1,17 @@
-package ru.glabrion.main.screen.general
+package ru.glabrion.main.screens.general
 
 import kotlinx.coroutines.*
-import org.koin.core.KoinComponent
 import kotlin.coroutines.CoroutineContext
 
-class GeneralRepository : GeneralContractInterface.Repository, KoinComponent, CoroutineScope {
+class GeneralRepository : GeneralContractInterface.Repository, CoroutineScope {
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
     override suspend fun getContent() =
         withContext(coroutineContext) {
-            delay(2000)
-            "HELLO"
+            delay(1000)
+            "HELLO MVP"
         }
 
 }
