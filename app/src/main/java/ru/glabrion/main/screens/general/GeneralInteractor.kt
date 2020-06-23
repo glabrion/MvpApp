@@ -1,8 +1,8 @@
 package ru.glabrion.main.screens.general
 
-class GeneralInteractor {
+class GeneralInteractor: GeneralContractInterface.Interactor{
 
     private val generalRepository = GeneralRepository()
 
-    suspend fun getContent() = generalRepository.getContent()
+    override suspend fun getContent() = generalRepository.getContent()
 }

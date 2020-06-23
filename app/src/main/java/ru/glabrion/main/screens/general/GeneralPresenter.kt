@@ -5,14 +5,14 @@ import ru.glabrion.base.presenter.BasePresenter
 import kotlin.coroutines.CoroutineContext
 
 class GeneralPresenter : BasePresenter<GeneralContractInterface.View>(),
-    GeneralContractInterface.Presenter, GeneralContractInterface.Interactor, CoroutineScope {
+    GeneralContractInterface.Presenter, CoroutineScope {
 
     private val generalInteractor = GeneralInteractor()
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
-    fun showToast() {
+    override fun showToast() {
         var text = ""
         launch {
             withContext(Dispatchers.Main) {

@@ -14,9 +14,13 @@ interface GeneralContractInterface {
         fun showToast(text: String)
     }
 
-    interface Presenter : BasePresenterInterface<View>
+    interface Presenter : BasePresenterInterface<View>{
+        fun showToast()
+    }
 
-    interface Interactor: BaseInteractorInterface
+    interface Interactor: BaseInteractorInterface{
+        suspend fun getContent(): String
+    }
 
     interface Repository : BaseRepositoryInterface {
         suspend fun getContent(): String
