@@ -2,18 +2,28 @@ package ru.glabrion.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.glabrion.R
-import ru.glabrion.base.view.BaseActivity
 import ru.glabrion.main.screens.general.GeneralFragment
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
-    override val layoutResId: Int
-        get() = R.layout.activity_main
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            openGeneralScreen()
+        }
+    }
 
-    override fun init(state: Bundle?) {
-        openGeneralScreen()
+    private fun openGeneralScreen() {
+        val generalFragment = GeneralFragment()
+        supportFragmentManager.beginTransaction().replace(
+            R.id.main_fragment_container,
+            generalFragment
+        ).addToBackStack(generalFragment.tag)
+            .commit()
     }
 
     fun showProgress() {
@@ -24,12 +34,4 @@ class MainActivity : BaseActivity() {
         main_progress.visibility = View.GONE
     }
 
-    private fun openGeneralScreen(){
-        val generalFragment = GeneralFragment()
-        supportFragmentManager.beginTransaction().replace(
-            R.id.main_fragment_container,
-            generalFragment
-        ).addToBackStack(generalFragment.tag)
-            .commit()
-    }
 }
