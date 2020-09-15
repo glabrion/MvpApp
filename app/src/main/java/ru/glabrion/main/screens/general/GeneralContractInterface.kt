@@ -1,8 +1,6 @@
 package ru.glabrion.main.screens.general
 
-import ru.glabrion.base.interactor.BaseInteractorInterface
 import ru.glabrion.base.presenter.BasePresenterInterface
-import ru.glabrion.base.repository.BaseRepositoryInterface
 import ru.glabrion.base.view.BaseViewInterface
 
 interface GeneralContractInterface {
@@ -12,17 +10,12 @@ interface GeneralContractInterface {
         fun showProgress()
         fun hideProgress()
         fun showToast(text: String)
+        fun hideKeyboard()
+        fun setErrorState()
     }
 
     interface Presenter : BasePresenterInterface<View>{
-        fun showToast()
-    }
-
-    interface Interactor: BaseInteractorInterface{
-        suspend fun getContent(): String
-    }
-
-    interface Repository : BaseRepositoryInterface {
-        suspend fun getContent(): String
+        fun onOkButtonClick(name: String?)
+        suspend fun getContent(name: String?): String
     }
 }

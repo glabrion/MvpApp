@@ -7,24 +7,36 @@ import kotlin.coroutines.CoroutineContext
 class GeneralPresenter : BasePresenter<GeneralContractInterface.View>(),
     GeneralContractInterface.Presenter, CoroutineScope {
 
-    private val generalInteractor = GeneralInteractor()
-    private val job = Job()
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.IO
+        get() = Job() + Dispatchers.IO
 
-    override fun showToast() {
-        var text = ""
+    override fun onOkButtonClick(name: String?) {
         launch {
             withContext(Dispatchers.Main) {
                 view?.showProgress()
-                text = generalInteractor.getContent()
-                if (text.isNotEmpty()) {
-                    view?.showToast(text)
-                } else {
-                    view?.showError()
+                name?.let {
+                    view?.hideKeyboard()
+                    val text = getContent(name)
+                    if (name.isNotEmpty()) {
+                        view?.showToast(text)
+                    } else {
+                        view?.setErrorState()
+                        view?.showError()
+                    }
                 }
                 view?.hideProgress()
             }
         }
+    }
+
+    override suspend fun getContent(name: String?): String =
+        withContext(coroutineContext) {
+            // return string after 1 second
+            delay(1000)
+            "$HELLO_TEXT $name"
+        }
+
+    companion object {
+        const val HELLO_TEXT = "HELLO"
     }
 }

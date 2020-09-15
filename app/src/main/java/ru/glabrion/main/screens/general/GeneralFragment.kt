@@ -1,20 +1,21 @@
 package ru.glabrion.main.screens.general
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_general.*
+import kotlinx.android.synthetic.main.fragment_general.view.*
 import ru.glabrion.R
 import ru.glabrion.base.view.BaseFragment
 import ru.glabrion.main.MainActivity
-import ru.glabrion.main.screens.general.provider.GeneralStringProvider
 
 class GeneralFragment : BaseFragment(), GeneralContractInterface.View {
 
     private val generalPresenter = GeneralPresenter()
-    private val generalStringProvider = GeneralStringProvider(context)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,13 +28,14 @@ class GeneralFragment : BaseFragment(), GeneralContractInterface.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         generalPresenter.attach(this)
-        hello_button.setOnClickListener {
-            generalPresenter.showToast()
+        ok_button.setOnClickListener {
+            val name = view.name_et.text.toString()
+            generalPresenter.onOkButtonClick(name)
         }
     }
 
     override fun showError() {
-        Toast.makeText(context, generalStringProvider.getErrorText(), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context?.getText(R.string.error_text), Toast.LENGTH_LONG).show()
     }
 
     override fun showToast(text: String) {
@@ -48,5 +50,18 @@ class GeneralFragment : BaseFragment(), GeneralContractInterface.View {
         (activity as? MainActivity)?.hideProgress()
     }
 
+    override fun hideKeyboard() {
+        val imm: InputMethodManager =
+            activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = activity?.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    override fun setErrorState() {
+        view?.name_et?.error = context?.getText(R.string.error_text_hint)
+    }
 
 }
