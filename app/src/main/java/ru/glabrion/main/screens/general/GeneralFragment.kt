@@ -13,17 +13,9 @@ import ru.glabrion.R
 import ru.glabrion.base.view.BaseFragment
 import ru.glabrion.main.MainActivity
 
-class GeneralFragment : BaseFragment(), GeneralContractInterface.View {
+class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContractInterface.View {
 
     private val generalPresenter = GeneralPresenter()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_general, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
