@@ -2,13 +2,9 @@ package ru.glabrion.main.screens.general
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_general.*
-import kotlinx.android.synthetic.main.fragment_general.view.*
 import ru.glabrion.R
 import ru.glabrion.base.view.BaseFragment
 import ru.glabrion.databinding.FragmentGeneralBinding
@@ -26,7 +22,7 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContract
         fragmentGeneralBinding = binding
         generalPresenter.attach(this)
         fragmentGeneralBinding?.okButton?.setOnClickListener {
-            val name = view.name_et.text.toString()
+            val name = fragmentGeneralBinding?.nameEt?.text.toString()
             generalPresenter.onOkButtonClick(name)
         }
     }
@@ -58,11 +54,10 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContract
     }
 
     override fun setErrorState() {
-        view?.name_et?.error = context?.getText(R.string.error_text_hint)
+        fragmentGeneralBinding?.nameEt?.error = context?.getText(R.string.error_text_hint)
     }
 
     override fun onDestroyView() {
-        // Consider not storing the binding instance in a field, if not needed.
         fragmentGeneralBinding = null
         super.onDestroyView()
     }
