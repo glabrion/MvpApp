@@ -58,6 +58,7 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContract
     }
 
     override fun onDestroyView() {
+        generalPresenter.detach()
         fragmentGeneralBinding = null
         super.onDestroyView()
     }
