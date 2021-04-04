@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add<GeneralFragment>(R.id.fragment_container_view)
+            addToBackStack(GeneralFragment.TAG)
         }
     }
 

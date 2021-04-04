@@ -12,6 +12,10 @@ import ru.glabrion.main.MainActivity
 
 class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContractInterface.View {
 
+    companion object {
+        const val TAG = "GeneralFragmentTag"
+    }
+
     private val generalPresenter = GeneralPresenter()
 
     private var fragmentGeneralBinding: FragmentGeneralBinding? = null
