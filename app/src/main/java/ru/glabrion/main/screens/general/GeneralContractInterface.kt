@@ -6,16 +6,10 @@ import ru.glabrion.base.view.BaseViewInterface
 interface GeneralContractInterface {
 
     interface View : BaseViewInterface {
-        fun showError()
-        fun showProgress()
-        fun hideProgress()
-        fun showToast(text: String)
-        fun hideKeyboard()
-        fun setErrorState()
+        fun openHelloScreen()
     }
 
     interface Presenter : BasePresenterInterface<View>{
-        fun onOkButtonClick(name: String?)
-        suspend fun getContent(name: String?): String
+        fun onToHelloScreenClock()
     }
 }

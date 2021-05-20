@@ -5,15 +5,20 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.fragment.app.replace
 import ru.glabrion.R
+import ru.glabrion.databinding.ActivityMainBinding
 import ru.glabrion.main.screens.general.GeneralFragment
+import ru.glabrion.main.screens.hello.HelloFragment
 
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
+    private var activityMainBinding: ActivityMainBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         if (supportFragmentManager.backStackEntryCount == 0) {
             openGeneralScreen()
         }
@@ -28,11 +33,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     fun showProgress() {
-        main_progress.visibility = View.VISIBLE
+        activityMainBinding?.mainProgress?.visibility = View.VISIBLE
     }
 
     fun hideProgress() {
-        main_progress.visibility = View.GONE
+        activityMainBinding?.mainProgress?.visibility = View.GONE
+    }
+
+    fun openHelloScreen() {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<HelloFragment>(R.id.fragment_container_view, HelloFragment.TAG)
+            addToBackStack(HelloFragment.TAG)
+        }
     }
 
 }
