@@ -1,12 +1,9 @@
 package ru.glabrion.main.screens.general
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import ru.glabrion.R
 import ru.glabrion.base.view.BaseFragment
 import ru.glabrion.databinding.FragmentGeneralBinding
@@ -35,7 +32,7 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContract
         super.onViewCreated(view, savedInstanceState)
         generalPresenter.attach(this)
         fragmentGeneralBinding?.toHelloScreenButton?.setOnClickListener {
-            generalPresenter.onToHelloScreenClock()
+            generalPresenter.onToHelloScreenClick()
         }
     }
 

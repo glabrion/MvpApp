@@ -10,6 +10,6 @@ interface GeneralContractInterface {
     }
 
     interface Presenter : BasePresenterInterface<View>{
-        fun onToHelloScreenClock()
+        fun onToHelloScreenClick()
     }
 }

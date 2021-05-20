@@ -7,7 +7,7 @@ import kotlin.coroutines.CoroutineContext
 class GeneralPresenter : BasePresenter<GeneralContractInterface.View>(),
     GeneralContractInterface.Presenter {
 
-    override fun onToHelloScreenClock() {
+    override fun onToHelloScreenClick() {
         view?.openHelloScreen()
     }
 }
