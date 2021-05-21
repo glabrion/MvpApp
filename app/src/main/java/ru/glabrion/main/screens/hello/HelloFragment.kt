@@ -40,6 +40,8 @@ class HelloFragment : BaseFragment(R.layout.fragment_hello), HelloContractInterf
         }
     }
 
+    override fun getTitle() = getString(R.string.hello_fragment)
+
     override fun showError() {
         Toast.makeText(context, context?.getText(R.string.error_text), Toast.LENGTH_LONG).show()
     }

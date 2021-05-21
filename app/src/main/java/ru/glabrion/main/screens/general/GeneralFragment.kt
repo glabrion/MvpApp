@@ -36,6 +36,8 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralContract
         }
     }
 
+    override fun getTitle() = getString(R.string.home_text)
+    
     override fun onDestroyView() {
         generalPresenter.detach()
         fragmentGeneralBinding = null

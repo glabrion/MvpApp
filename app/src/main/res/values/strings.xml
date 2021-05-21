@@ -5,4 +5,6 @@
     <string name="ok_button">OK</string>
     <string name="input_your_name">Input your name</string>
     <string name="to_hello_screen">To hello screen</string>
+    <string name="home_text">Home</string>
+    <string name="hello_fragment">Hello Fragment</string>
 </resources>
